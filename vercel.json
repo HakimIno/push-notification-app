@@ -1,13 +1,13 @@
 {
   "rewrites": [
     {
-      "source": "/path*",
+      "source": "/*",
       "destination": "https://exp.host/--/api/v2/push/send"
     }
   ],
   "headers": [
     {
-      "source": "/path*",
+      "source": "/*",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
