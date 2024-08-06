@@ -1,7 +1,6 @@
 import { useState } from 'preact/hooks'
 import '@radix-ui/themes/styles.css';
 import { Box, Button, Flex, Tabs, Text, TextField, Theme } from '@radix-ui/themes';
-import { API_URL_ENDPOINT } from './utils/http';
 
 export function App() {
 
