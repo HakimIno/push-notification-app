@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
+import dns from 'node:dns'
 
-// https://vitejs.dev/config/
+dns.setDefaultResultOrder('verbatim')
+
 export default defineConfig({
   plugins: [preact()],
-})
+});

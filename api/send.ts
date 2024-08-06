@@ -1,6 +1,6 @@
 export default async function handler(req: any, res: any) {
     try {
-        const response = await fetch('https://exp.host/--/api/v2/push/send', {
+        const response = await fetch('http://localhost:3000/send', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
