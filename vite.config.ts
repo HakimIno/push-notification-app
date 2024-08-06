@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [preact()],
   server: {
     proxy: {
-      '/v1': {
+      '/api': {
         target: 'https://exp.host/--/api/v2/push/send',
         changeOrigin: true,
-        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },

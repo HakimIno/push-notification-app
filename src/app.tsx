@@ -20,7 +20,7 @@ export function App() {
     };
 
     try {
-      const response = await fetch(API_URL_ENDPOINT, {
+      const response = await fetch('/api/send-push', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
