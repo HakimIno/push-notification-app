@@ -22,9 +22,7 @@ export function App() {
       const response = await fetch('https://cors-anywhere.herokuapp.com/https://exp.host/--/api/v2/push/send', {
         method: 'POST',
         headers: {
-          Accept:
-            'application/json',
-          'Access-Control-Allow-Origin': "*",
+          Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(message),
