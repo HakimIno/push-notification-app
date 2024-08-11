@@ -1,5 +1,5 @@
 import { FC } from 'preact/compat';
-import { Box, Button, Flex, Text, TextField } from "@radix-ui/themes";
+import { Box, Flex, Spinner, Text, TextField } from "@radix-ui/themes";
 
 interface NotificationFormProps {
     title: string;
@@ -12,7 +12,8 @@ interface NotificationFormProps {
     setTo?: (value: string) => void;
     onSubmit: (e: { preventDefault: () => void }) => Promise<void>;
     selectedImage: string | ArrayBuffer | null
-    handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    loading: boolean
 }
 
 // Component for TextField with label
@@ -42,7 +43,8 @@ const NotificationForm: FC<NotificationFormProps> = ({
     setTo,
     onSubmit,
     selectedImage,
-    handleFileChange
+    handleFileChange,
+    loading
 }) => (
     <Flex direction="column" gap="4">
         {to !== undefined && setTo !== undefined && (
@@ -85,7 +87,7 @@ const NotificationForm: FC<NotificationFormProps> = ({
                         d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
                         data-original="#000000" />
                 </svg>
-                อัปโหลดรูป
+                Upload Image
                 <input type="file" id="uploadFile1" className="hidden" onChange={handleFileChange} />
             </label>
             {selectedImage && (
@@ -94,16 +96,24 @@ const NotificationForm: FC<NotificationFormProps> = ({
                 </Box>
             )}
         </Box>
-        <Box maxWidth="250px" mt="4">
-            <Button
+        <Box maxWidth="250px" mt="4" loading="eager">
+            <button
                 variant="soft"
                 radius="large"
                 //@ts-ignore
                 size="3"
                 onClick={onSubmit}
+                disabled={loading} // ปิดการคลิกปุ่มเมื่อกำลังโหลด
+                className={"bg-blue-600 w-48 h-10 flex justify-center items-center text-white rounded-lg font-semibold gap-3"}
             >
-                Send Notification
-            </Button>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                    <path d="M3.105 2.288a.75.75 0 0 0-.826.95l1.414 4.926A1.5 1.5 0 0 0 5.135 9.25h6.115a.75.75 0 0 1 0 1.5H5.135a1.5 1.5 0 0 0-1.442 1.086l-1.414 4.926a.75.75 0 0 0 .826.95 28.897 28.897 0 0 0 15.293-7.155.75.75 0 0 0 0-1.114A28.897 28.897 0 0 0 3.105 2.288Z" />
+                </svg>
+
+                <div className="w-[70%]">
+                    {loading ? <Spinner className={"ml-12"} /> : <span className={"text-center"}>Send Notification</span>}
+                </div>
+            </button>
         </Box>
     </Flex>
 );

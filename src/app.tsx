@@ -19,6 +19,8 @@ export function App() {
   const [selectedImage, setSelectedImage] = useState<string | ArrayBuffer | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  const [loading, setLoading] = useState(false)
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //@ts-ignore
     const file = event.target.files?.[0];
@@ -58,8 +60,9 @@ export function App() {
   };
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
-
     e.preventDefault();
+    setLoading(true); // ตั้งสถานะการโหลดเป็น true
+
     const message = {
       to,
       title,
@@ -82,17 +85,19 @@ export function App() {
           throw new Error('Failed to send push notification');
         }
 
-        setTo("")
-        setTitle("")
-        setBody("")
-        setData("")
-        toast.success('Push notification sent successfully!')
+        setTo("");
+        setTitle("");
+        setBody("");
+        setData("");
+        toast.success('Push notification sent successfully!');
       } else {
-        toast.error('Error sending push notification!')
+        toast.error('Error sending push notification!');
       }
 
     } catch (error) {
-      toast.error('Error sending push notification!')
+      toast.error('Error sending push notification!');
+    } finally {
+      setLoading(false); // ตั้งสถานะการโหลดเป็น false หลังจากเสร็จสิ้นการทำงาน
     }
   };
 
@@ -111,6 +116,7 @@ export function App() {
 
   const handleSubmitAll = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+    setLoading(true);  // ตั้งสถานะการโหลดเป็น true
 
     const message = {
       to,
@@ -126,12 +132,13 @@ export function App() {
 
         if (tokens.length === 0) {
           toast.error('No tokens found!');
+          setLoading(false);  // ตั้งสถานะการโหลดเป็น false
           return;
         }
 
         await handleSubmitToDb()
 
-        // Send push notifications to each token
+        // ส่งการแจ้งเตือน push ไปยัง token แต่ละตัว
         await Promise.all(tokens.map(async ({ token }) => {
           const response = await fetch(API_URL_ENDPOINT, {
             method: 'POST',
@@ -147,12 +154,13 @@ export function App() {
           }
         }));
 
-        setTo("")
-        setTitle("")
-        setBody("")
-        setData("")
-        setSelectedFile(null)
-        setSelectedImage(null)
+        // ล้างข้อมูลฟอร์ม
+        setTo("");
+        setTitle("");
+        setBody("");
+        setData("");
+        setSelectedFile(null);
+        setSelectedImage(null);
         toast.success('Push notifications sent successfully!');
       } else {
         toast.error('Error sending push notifications!');
@@ -160,8 +168,11 @@ export function App() {
     } catch (error) {
       console.error('Error:', error);
       toast.error('Error sending push notifications!');
+    } finally {
+      setLoading(false);  // ตั้งสถานะการโหลดเป็น false ไม่ว่าจะเกิดข้อผิดพลาดหรือไม่
     }
   };
+
 
 
   const [userId, setUserId] = useState<string>('');
@@ -281,6 +292,7 @@ export function App() {
                           onSubmit={handleSubmitAll}
                           selectedImage={selectedImage}
                           handleFileChange={handleFileChange}
+                          loading={loading}
                         />
                       </Tabs.Content>
 
@@ -297,6 +309,7 @@ export function App() {
                           onSubmit={handleSubmit}
                           selectedImage={selectedImage}
                           handleFileChange={handleFileChange}
+                          loading={loading}
                         />
                       </Tabs.Content>
                     </Box>
