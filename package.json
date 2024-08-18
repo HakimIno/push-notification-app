@@ -15,7 +15,8 @@
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/supabase-js": "^2.45.1",
     "preact": "^10.22.1",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^6.26.1"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.8.3",
