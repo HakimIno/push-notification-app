@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes, HashRouter as Router } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import { Theme } from '@radix-ui/themes';
