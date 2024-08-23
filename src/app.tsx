@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Routes, HashRouter as Router } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
