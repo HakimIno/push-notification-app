@@ -54,7 +54,7 @@ const PrivacyPolicy = () => {
                         หากคุณมีคำถามหรือข้อกังวลเกี่ยวกับนโยบายความเป็นส่วนตัวนี้ โปรดติดต่อเราที่ <strong>support@wbabybird.com</strong>
                     </p>
 
-                    <p className="text-lg text-gray-300 leading-relaxed text-right mt-6">อัปเดตล่าสุด: 18/08/2024</p>
+                    <p className="text-lg text-gray-300 leading-relaxed text-right mt-6">อัปเดตล่าสุด: 23/08/2024</p>
 
                     <p className="text-lg text-gray-300 leading-relaxed mt-6">
                         รูปภาพ ตัวละครนก และธีมต่าง ๆ ในแอปนี้ได้ถูกสร้างขึ้นโดยใช้ ChatGPT และ Canva รวมถึงการซื้อ asset จาก <a href="https://megacrash.itch.io/" className="text-blue-500 underline">https://megacrash.itch.io/</a>
